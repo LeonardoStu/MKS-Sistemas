@@ -4,6 +4,7 @@ import style from './style.module.scss'
 import { api } from "@/api"
 import { useQuery } from "@tanstack/react-query"
 import Image from 'next/image'
+import { FaBagShopping } from 'react-icons/fa6'
 
 export default function Products() {
     const fetchProduct = async() => {
@@ -20,30 +21,34 @@ export default function Products() {
     if(error) return <p>Erro ao carregar produtos: {error.message}</p>
 
     return<>
-        <div>
-            {
-                products.length > 0 ? (
-                    products.map((product: any) => (
-                        <div key={product.id} className={style.container}>
-                            <div className={style.imgProduct}>
-                                <Image width={100} height={100} src={product.photo} alt={product.name} />
-                            </div>
+        <div className={style.main}>
+            <div className={style.container}>
+                {
+                    products.length > 0 ? (
+                        products.map((product: any) => (
+                            <div key={product.id} className={style.containerProduct}>
+                                <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: '100%'}}>
+                                    <Image width={200} height={200} src={product.photo} alt={product.name} className={style.imgProduct}/>
+                                </div>
 
-                            <div className={style.textProduct}>
-                                <p className={style.name}>{product.name}</p>
-                                <p className={style.price}>R${product.price}</p>
-                            </div>
+                                <div className={style.textProduct}>
+                                    <p style={{fontSize: '20.5px'}}>{product.name}</p>
+                                    <p className={style.price}>R${product.price}</p>
+                                </div>
 
-                            <div className={style.descriptionProduct}>
-                                <p className={style.description}>{product.description}</p>
+                                <div className={style.descriptionProduct}>
+                                    <p>{product.description}</p>
+                                </div>
+                                <button className={style.btnBuy}>
+                                    <FaBagShopping style={{width: '15px', height: '15px'}} /> <span style={{paddingLeft:'5px'}}>COMPRAR</span>
+                                </button>
                             </div>
-                            <button>COMPRAR</button>
-                        </div>
-                    ))
-                ) : (
-                    <p>Sem produtos adicionados</p>
-                )
-            }
+                        ))
+                    ) : (
+                        <p>Sem produtos adicionados</p>
+                    )
+                }
+            </div>
         </div>
     </>
 }
