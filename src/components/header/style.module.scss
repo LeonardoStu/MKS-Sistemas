@@ -1,0 +1,25 @@
+@import '../../style/colors.module.scss';
+
+.header{
+    background-color: $color-primary;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px 80px 25px 60px;
+}
+.btnCart{
+    padding: 15px 30px;
+    background-color: white;
+    display: flex;
+    border: none;
+    border-radius: 6px;
+    transition: 0.5s;
+
+    &:hover{
+        background-color: rgb(235, 235, 235);
+    }
+}
+.iconCart{
+    height: 20px;
+    width: 20px;
+}
