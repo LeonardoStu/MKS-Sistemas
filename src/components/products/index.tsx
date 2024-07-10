@@ -1,5 +1,6 @@
 "use client"
 
+import { useCartStore } from '@/store/useCartStore'
 import style from './style.module.scss'
 import { api } from "@/api"
 import { useQuery } from "@tanstack/react-query"
@@ -16,6 +17,8 @@ export default function Products() {
     queryKey: ['products'],
     queryFn: fetchProduct
     })
+
+    const [addToCart] = useCartStore((state) => [state.addToCart])
 
     if(isLoading) return <p>Carregando...</p>
     if(error) return <p>Erro ao carregar produtos: {error.message}</p>
@@ -39,7 +42,7 @@ export default function Products() {
                                 <div className={style.descriptionProduct}>
                                     <p>{product.description}</p>
                                 </div>
-                                <button className={style.btnBuy}>
+                                <button className={style.btnBuy} onClick={() => addToCart(product)}>
                                     <FaBagShopping style={{width: '15px', height: '15px'}} /> <span style={{paddingLeft:'5px'}}>COMPRAR</span>
                                 </button>
                             </div>
