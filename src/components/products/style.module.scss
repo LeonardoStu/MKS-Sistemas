@@ -32,7 +32,6 @@
     background-color: transparent;
 }
 .textProduct{
-    // background-color: yellow;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -72,5 +71,33 @@
 
     &:hover{
         background-color: #0f53baec;
+    }
+}
+
+@media(max-width: 2500px){
+    .container{
+        width: 60%;
+    }
+    .containerProduct{
+        height: 380px;
+    }
+}
+@media(max-width: 2200px){
+    .container{
+        width: 65%;
+    }
+    .containerProduct{
+        height: 350px;
+    }
+}
+@media(max-width: 2000px){
+    .container{
+        width: 65%;
+    }
+    .containerProduct{
+        height: 300px;
+    }
+    .imgProduct{
+        height: 100px;
     }
 }

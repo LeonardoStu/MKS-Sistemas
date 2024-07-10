@@ -1,13 +1,17 @@
 "use client"
 
-import { useCartStore } from '@/store/useCartStore'
 import style from './style.module.scss'
+import Image from 'next/image'
+import Toast from '../toast'
 import { api } from "@/api"
 import { useQuery } from "@tanstack/react-query"
-import Image from 'next/image'
+import { useEffect, useState } from 'react'
 import { FaBagShopping } from 'react-icons/fa6'
+import { Product, useCartStore } from '@/store/useCartStore'
 
 export default function Products() {
+    const [toast, setToast] = useState(false)
+
     const fetchProduct = async() => {
         const response = await api.get('/products?page=1&rows=8&sortBy=id&orderBy=ASC')
         return response.data.products
@@ -18,9 +22,23 @@ export default function Products() {
     queryFn: fetchProduct
     })
 
-    const [addToCart] = useCartStore((state) => [state.addToCart])
+    const addToCart = useCartStore((state) => state.addToCart)
 
-    if(isLoading) return <p>Carregando...</p>
+    const handleAddToCart = (products: Product) => {
+        addToCart(products)
+        setToast(true)
+    }
+
+    useEffect(() => {
+        if (toast) {
+            const timer = setTimeout(() => {
+                setToast(false)
+            }, 3000) 
+            return () => clearTimeout(timer)
+        }
+    }, [toast])
+
+    if(isLoading) return <p>Carregando...</p> 
     if(error) return <p>Erro ao carregar produtos: {error.message}</p>
 
     return<>
@@ -42,7 +60,7 @@ export default function Products() {
                                 <div className={style.descriptionProduct}>
                                     <p>{product.description}</p>
                                 </div>
-                                <button className={style.btnBuy} onClick={() => addToCart(product)}>
+                                <button className={style.btnBuy} onClick={() => handleAddToCart(product)}>
                                     <FaBagShopping style={{width: '15px', height: '15px'}} /> <span style={{paddingLeft:'5px'}}>COMPRAR</span>
                                 </button>
                             </div>
@@ -52,6 +70,7 @@ export default function Products() {
                     )
                 }
             </div>
+            <Toast message='Adicionado ao Carrinho' show={toast} />
         </div>
     </>
 }
