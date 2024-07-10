@@ -1,0 +1,112 @@
+@import '../../style/colors.module.scss';
+
+.cartContainer {
+    display: flex;
+    flex-direction: column;
+    height: 100vh; 
+}
+
+.header {
+    color: white;
+    margin: 50px 0 0 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: calc(100% - 80px);
+}
+
+.closeBtn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.content {
+    flex: 1;
+    overflow-y: auto; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 180px;
+}
+
+.productContainer {
+    position: relative; 
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    height: 120px;
+    margin-top: 50px;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.productImg {
+    width: 100%;
+    height: 100%;
+}
+
+.btnQuantity {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+    border-radius: 10px;
+    overflow: hidden;
+    width: auto;
+}
+
+.quantityBtn {
+    width: 30px;
+    height: 25px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+
+    &:hover {
+        background-color: rgb(211, 211, 211);
+    }
+}
+
+.removeButton {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    color: black;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.finishBuy {
+    width: 100%;
+    padding: 30px;
+    font-size: 30px;
+    font-weight: bold;
+    background-color: black;
+    color: white;
+    border: none;
+    cursor: pointer;
+
+    &:hover{
+        background-color: rgb(43, 43, 43);
+    }
+}
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: $color-primary;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000; 
+}
